@@ -3,12 +3,22 @@ var URL = require('url');
 var HTTP = require('http');
 HTTP.globalAgent.maxSockets = 2;
 
-exports.download = function (url, callback, german, binary) {
+exports.download = function (url, callbackFunction, german, binary) {
 	var opt = URL.parse(url);
 					
 	var protocol = HTTP;
 	
 	var language = german ? 'de-de;q=0.7,en;q=0.3' : 'en-us;q=0.7,en;q=0.3';
+
+	var calledback = false;
+	var finished = false;
+
+	var callback = function (data, error) {
+		if (!calledback) {
+			calledback = true;
+			callbackFunction(data, error);
+		}
+	}
 	
 	var request = protocol.request(
 		{
@@ -25,7 +35,9 @@ exports.download = function (url, callback, german, binary) {
 			var code = res.statusCode;
 			if (code != 200) {
 				console.error('ERROR: HTTP code = ' + code + ' (' + url + ')');
+				finished = true;
 				callback(undefined, false);
+				request.abort();
 				return;
 			}
 			
@@ -36,22 +48,29 @@ exports.download = function (url, callback, german, binary) {
 			res.on('data', function (chunk) { data += chunk });
 			
 			res.on('end', function () {
+				finished = true;
 				callback(data, true);
-			});
-
-			res.on('error', function (e) {
-				console.error('UNKOWN ERROR: '+e);
 			});
 		}
 	);
 	
-	request.setTimeout(10*1000, function (e) {
-		console.error('Timeout: '+e);
+	request.setTimeout(3*1000, function (e) {
+		console.error('request timeout: '+url);
 		callback(undefined, false);
 	});
 	
 	request.on('error', function(e) {
 		console.error('UNKOWN ERROR: '+e);
+	});
+	
+	request.on('socket', function(e) {
+		setTimeout(function () {
+			if (!finished) {
+				console.error('Verkackt!');
+				request.abort();
+				callback(undefined, false);
+			}
+		}, 10*1000);
 	});
 	
 	request.end();

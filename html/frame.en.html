@@ -50,31 +50,49 @@
 						<button class="btn btn-full" value="foreign">In any country except Germany</button>
 						<div id="countries">
 							<div class="btn-group">
-								<button class="btn" value="country-SS" style="width:30%">S. Sudan</button>
-								<button class="btn" value="country-VA" style="width:30%">Vatican</button>
-								<button class="btn" value="country-AF" style="width:40%">Afghanistan</button>
+								<button class="btn" value="country-SS" style="width:33%">S. Sudan</button>
+								<button class="btn" value="country-VA" style="width:33%">Vatican</button>
+								<button class="btn" value="country-AF" style="width:34%">Afghanistan</button>
 							</div>
 							<div class="btn-group">
-								<button class="btn" value="country-CH" style="width:40%">Switzerland</button>
-								<button class="btn" value="country-AT" style="width:30%">Austria</button>
-								<button class="btn" value="country-US" style="width:30%">USA</button>
+								<button class="btn" value="country-FR" style="width:33%">France</button>
+								<button class="btn" value="country-ES" style="width:33%">Spain</button>
+								<button class="btn" value="country-GB" style="width:34%">United Kingdom</button>
+							</div>
+							<div class="btn-group">
+								<button class="btn" value="country-CH" style="width:33%">Switzerland</button>
+								<button class="btn" value="country-AT" style="width:33%">Austria</button>
+								<button class="btn" value="country-US" style="width:34%">USA</button>
 							</div>
 						</div>
 					</div>
-					<h3>Sort by</h3>
-					<div class="btn-group" data-toggle="buttons-radio" id="gridSort">
-						<button class="btn active" value="rank">Views</button>
-						<button class="btn" value="rating">Rating</button>
-						<button class="btn" value="blocked">Blocking</button>
+					<div id="controller-sortby">
+						<h3>Sort by</h3>
+						<div class="btn-group" data-toggle="buttons-radio" id="gridSort">
+							<button class="btn active" value="rank">Views</button>
+							<button class="btn" value="rating">Rating</button>
+							<button class="btn" value="blocked">Blocking</button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="footer">
-				Made by <a href="http://www.opendatacity.de/" class="opendatacity">OpenDataCity</a>.  <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">CC-BY 3.0</a>. <a href="data/top1000.tsv">Download the data</a>.
+				<div id="footer">
+					last updated: 28/01/2013, <a href="data/top1000.tsv">data</a>, <a href="http://apps.opendatacity.de/gema-vs-youtube/en/">about this app</a>
+				</div>
 			</div>
 			<div id="small-warning">
-				<p>Window is too small to show the Top 1000 YouTube videos. <a href="{{url}}">Follow me.</a></p>
+				<p>Window is too small to show the Top 1000 YouTube videos. <a href="http://apps.opendatacity.de/gema-vs-youtube/">Follow me.</a></p>
 			</div>
 		</div>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-38022006-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
 	</body>
 </html>

@@ -43,38 +43,56 @@
 						<h3>Gesperrt in Deutschland</h3>
 						<div class="btn-group btn-group-vertical">
 							<button class="btn active" value="germany">Alle in Deutschland gesperrten Videos</button>
-							<button class="btn" value="other">konkrete Rechteprobleme</button>
+							<button class="btn" value="other">bestehende Rechteprobleme</button>
 							<button class="btn" value="gema">möglicherweise Rechteprobleme</button>
 						</div>
 						<h3>In anderen Ländern</h3>
 						<button class="btn btn-full" value="foreign">In anderen Staaten gesperrt</button>
 						<div id="countries">
 							<div class="btn-group">
-								<button class="btn" value="country-SS" style="width:30%">Südsudan</button>
-								<button class="btn" value="country-VA" style="width:30%">Vatikan</button>
-								<button class="btn" value="country-AF" style="width:40%">Afghanistan</button>
+								<button class="btn" value="country-SS" style="width:33%">Südsudan</button>
+								<button class="btn" value="country-VA" style="width:33%">Vatikan</button>
+								<button class="btn" value="country-AF" style="width:34%">Afghanistan</button>
 							</div>
 							<div class="btn-group">
-								<button class="btn" value="country-CH" style="width:30%">Schweiz</button>
-								<button class="btn" value="country-AT" style="width:40%">Österreich</button>
-								<button class="btn" value="country-US" style="width:30%">USA</button>
+								<button class="btn" value="country-FR" style="width:33%">Frankreich</button>
+								<button class="btn" value="country-ES" style="width:33%">Spanien</button>
+								<button class="btn" value="country-GB" style="width:34%">UK</button>
+							</div>
+							<div class="btn-group">
+								<button class="btn" value="country-CH" style="width:33%">Schweiz</button>
+								<button class="btn" value="country-AT" style="width:33%">Österreich</button>
+								<button class="btn" value="country-US" style="width:34%">USA</button>
 							</div>
 						</div>
 					</div>
-					<h3>Sortieren nach</h3>
-					<div class="btn-group" data-toggle="buttons-radio" id="gridSort">
-						<button class="btn active" value="rank">Aufrufe</button>
-						<button class="btn" value="rating">Bewertung</button>
-						<button class="btn" value="blocked">Sperrung</button>
+					<div id="controller-sortby">
+						<h3>Sortieren nach</h3>
+						<div class="btn-group" data-toggle="buttons-radio" id="gridSort">
+							<button class="btn active" value="rank">Aufrufe</button>
+							<button class="btn" value="rating">Bewertung</button>
+							<button class="btn" value="blocked">Sperrung</button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="footer">
-				Realisiert von <a href="http://www.opendatacity.de/" class="opendatacity">OpenDataCity</a>. Die Anwendung steht unter einer <a rel="license" href="http://creativecommons.org/licenses/by/3.0/de/">CC-BY 3.0</a>. Die Daten kann man <a href="data/top1000.tsv">hier runterladen</a>.
+				<div id="footer">
+					Stand: 28.01.2013, <a href="data/top1000.tsv">Daten</a>, <a href="http://apps.opendatacity.de/gema-vs-youtube/">Mehr zur App</a>
+				</div>
 			</div>
 			<div id="small-warning">
-				<p>Hier ist nicht genug Platz um die Top 1000 YouTube-Videos darzustellen. <a href="{{url}}">Hier entlang.</a></p>
+				<p>Hier ist nicht genug Platz um die Top 1000 YouTube-Videos darzustellen. <a href="http://apps.opendatacity.de/gema-vs-youtube/">Hier entlang.</a></p>
 			</div>
 		</div>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-38022006-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
 	</body>
 </html>

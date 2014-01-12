@@ -36,8 +36,9 @@ for (var i = 0; i < entries.length; i++) {
 		(function () {
 			var entry = entries[i];
 			queuedIn++;
+			var url = 'http://gdata.youtube.com/feeds/api/videos/'+entry.id+'?alt=json&key=AI39si6r5kwUQTFCnTgPIyn10GRX_L5LtaPW7Rs4HJUCSXmQmmeJJZ2g7L62NOhpWkF4H1p4AJCo51Q_R7TjQENATfasT7NkXA&v=2';
 			downloader.download(
-				'http://gdata.youtube.com/feeds/api/videos/'+entry.id+'?alt=json&key=AI39si6r5kwUQTFCnTgPIyn10GRX_L5LtaPW7Rs4HJUCSXmQmmeJJZ2g7L62NOhpWkF4H1p4AJCo51Q_R7TjQENATfasT7NkXA&v=2',
+				url,
 				function (data, ok) {
 					queuedOut++;
 					
@@ -88,6 +89,30 @@ for (var i = 0; i < entries.length; i++) {
 						entry.rating          = (data.gd$rating === undefined) ? -1 : parseFloat(data.gd$rating.average);
 						entry.viewCount       = parseInt(data.yt$statistics.viewCount, 10);
 						entry.category        = data.media$group.media$category[0].label;
+
+						if (downloadReason && restrictedInDE) {
+							queuedIn++;
+							downloader.download(
+								entry.url,
+								function (html, ok) {
+									queuedOut++;
+									if (ok) { entry.reasonDE = extractReason(html); } else { entry.use = false; }
+									check();
+								},
+								true
+							);
+							
+							queuedIn++;
+							downloader.download(
+								entry.url,
+								function (html, ok) {
+									queuedOut++;
+									if (ok) { entry.reasonEN = extractReason(html); } else { entry.use = false; }
+									check();
+								},
+								false
+							);
+						}
 					} else {
 						entry.use = false;
 					}
@@ -120,34 +145,6 @@ for (var i = 0; i < entries.length; i++) {
 					true
 				);
 			}
-		})();
-	}
-
-	if (downloadReason) {
-		(function () {
-			var entry = entries[i];
-			
-			queuedIn++;
-			downloader.download(
-				entry.url,
-				function (html, ok) {
-					queuedOut++;
-					if (ok) { entry.reasonDE = extractReason(html); } else { entry.use = false; }
-					check();
-				},
-				true
-			);
-			
-			queuedIn++;
-			downloader.download(
-				entry.url,
-				function (html, ok) {
-					queuedOut++;
-					if (ok) { entry.reasonEN = extractReason(html); } else { entry.use = false; }
-					check();
-				},
-				false
-			);
 		})();
 	}
 }
@@ -196,7 +193,6 @@ function check() {
 			lines.push(line.join('\t'));
 		}
 		fs.writeFileSync('../data/top1000.tsv', lines.join('\r'), 'utf8');
-		//fs.writeFileSync('../html/data/top1000.tsv', lines.join('\r'), 'utf8');
 	}
 }
 

@@ -267,11 +267,13 @@ $(function () {
 			entry.restrictionCountries[entry.restrictionsAll[j]] = true;
 		}
 	}
-	
+		
 	var width = $(window).width();
-	if (width < 530) sizeMode = 0;
-	else if (width > 850) sizeMode = 2;
-	else sizeMode = 1;
+
+	     if (width < 520) sizeMode = 1;
+	else if (width < 640) sizeMode = 0;
+	else if (width < 860) sizeMode = 1;
+	else sizeMode = 2;
 	
 	switch (sizeMode) {
 		case 0: thumbWidth = 11; thumbHeight =  9; columns = 25; rows = 40; imageUrl = 'assets/img/grid_520.jpg'; break;
@@ -312,9 +314,9 @@ function updateCanvas(options) {
 	var sort = function (entry) { return -entry.restrictedInDE };
 	var hint;
 	if (inEnglishPlease) {
-		hint = function (entry) { return (entry.restrictedInDE > 1) ? 'Begründung:<br><i>'+entry.reasonDE+'</i>' : '' };
-	} else {
 		hint = function (entry) { return (entry.restrictedInDE > 1) ? 'Reason:<br><i>'+entry.reasonEN+'</i>' : '' };
+	} else {
+		hint = function (entry) { return (entry.restrictedInDE > 1) ? 'Begründung:<br><i>'+entry.reasonDE+'</i>' : '' };
 	}
 	
 	switch (flagType.split('-')[0]) {
