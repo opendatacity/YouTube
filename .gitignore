@@ -10,3 +10,5 @@ charts/*.png
 results/*
 
 node/log/*
+
+.idea/*
